@@ -52,12 +52,45 @@ export const commentDom= async()=>{
      commentDiv.appendChild(commentHead)
 
 
+     const addComment = document.createElement('div');
+     addComment.className = 'addComment';
+     const addCommentHeader = document.createElement('h2');
+     addCommentHeader.textContent = 'Add Comments';
+     const formAddDiv = document.createElement('div');
+     formAddDiv.className = 'form-add';
+     const formAdd = document.createElement('form');
+     const NameDiv = document.createElement('div');
+     const name = document.createElement('input');
+     name.type = 'text';
+     name.id = 'name';
+     name.placeholder = 'Your name';
+     NameDiv.appendChild(name);
+     const insightDiv = document.createElement('div');
+     const insight = document.createElement('textarea');
+     insight.name = 'insight';
+     insight.cols=20
+     insight.rows=10
+     insight.placeholder = 'Your Comment';
+     insightDiv.appendChild(insight);
+     const submitBtnDiv = document.createElement('div');
+     const submitBtn = document.createElement('input');
+     submitBtn.type = 'button';
+     submitBtn.id = 'addcommentbtn';
+     submitBtn.value = 'Comment';
+     submitBtnDiv.appendChild(submitBtn)
+     formAdd.appendChild(NameDiv);
+     formAdd.appendChild(insightDiv);
+     formAdd.appendChild(submitBtnDiv);
+     formAddDiv.appendChild(formAdd);
+     addComment.appendChild(addCommentHeader);
+     addComment.appendChild(formAddDiv)
      
 
      commentMainDiv.appendChild(imgDiv)
      commentMainDiv.appendChild(imgTiltle)
      commentMainDiv.appendChild(descriptionDiv)
      commentMainDiv.appendChild(commentDiv)
+     commentMainDiv.appendChild(addComment);
      document.querySelector('.container').appendChild(commentMainDiv);
 }
 
