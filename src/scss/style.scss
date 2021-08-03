@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#mainDisplay {
+  width: 100%;
+
+  #list {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+
+    .card {
+      width: 25%;
+      margin: 20px;
+      padding: 10px;
+      border: 1px solid #aaa;
+
+      .image {
+        width: 100%;
+      }
+
+      .nameAndLikes {
+        display: flex;
+        justify-content: space-between;
+
+        .heart {
+          cursor: pointer;
+        }
+
+        .redheart {
+          color: plum;
+        }
+      }
+
+      .counter {
+        display: block;
+        text-align: end;
+      }
+
+      .comments {
+        width: 100%;
+        padding: 5px;
+        margin-top: 10px;
+      }
+    }
+  }
+}
