@@ -1,5 +1,5 @@
 .commentMainDiv{
-  width: 70%;
+  max-width: 1000px;
   margin: auto;
   border: 1px solid black;
     img{
@@ -12,4 +12,22 @@
       text-align: center;
       text-transform: uppercase;
     }
+    .descriptionDivSubPart1, .descriptionDivSubPart2{
+      width: 70%;
+      margin: auto;
+    }
+    .descriptionDivSubPart2{
+      padding-bottom: 50px;
+    }
+    .partOne{
+      float: left;
+    }
+    .partTwo{
+      float: right;
+    }
+    .clearDiv{
+      clear: both;
+      margin-bottom: 30px;
+    }
+
   }

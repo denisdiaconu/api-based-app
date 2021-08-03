@@ -16,8 +16,40 @@ export const commentDom= async()=>{
      imgTiltle.textContent=response.name;
      imgTiltle.classList="imgTiltle"
 
+     const descriptionDiv=document.createElement('div');
+     descriptionDiv.className="descriptionDiv";
+     const descriptionDivSubPart1=document.createElement('div')
+     descriptionDivSubPart1.className="descriptionDivSubPart1"
+     const partOne=document.createElement('span')
+     const partTwo=document.createElement('span')
+     partOne.textContent="Fuel: AAAAA"
+     partOne.className="partOne"
+     partTwo.className="partTwo"
+     partTwo.textContent="Lenght: BBBB"
+     descriptionDivSubPart1.appendChild(partOne)
+     descriptionDivSubPart1.appendChild(partTwo);
+     descriptionDiv.appendChild(descriptionDivSubPart1);
+
+     const clearDiv=document.createElement('div')
+     clearDiv.className="clearDiv"
+     const descriptionDivSubPart2=document.createElement('div')
+     descriptionDivSubPart2.className="descriptionDivSubPart2"
+     const partThree=document.createElement('span')
+     const partFour=document.createElement('span')
+     partThree.textContent="Fuel: AAAAA"
+     partThree.className="partOne"
+     partFour.className="partTwo"
+     partFour.textContent="Lenght: BBBB"
+     descriptionDivSubPart2.appendChild(partThree)
+     descriptionDivSubPart2.appendChild(partFour);
+     descriptionDiv.appendChild(clearDiv);
+     descriptionDiv.appendChild(descriptionDivSubPart2);
+
+     
+
      commentMainDiv.appendChild(imgDiv)
      commentMainDiv.appendChild(imgTiltle)
+     commentMainDiv.appendChild(descriptionDiv)
      document.querySelector('.container').appendChild(commentMainDiv);
 }
 
