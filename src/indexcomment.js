@@ -1,4 +1,5 @@
 import './scss/style-comment.scss';
-import {commentDom} from './js/commentDom'
+import {commentDom, createApi} from './js/commentDom'
 
 commentDom();
+createApi()

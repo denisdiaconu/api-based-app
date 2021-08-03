@@ -94,18 +94,33 @@ export const commentDom= async()=>{
      document.querySelector('.container').appendChild(commentMainDiv);
 }
 
- 
 const fetchApi=async (url, method, jsonBody = null) => {
+  const response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS,GET',
+    },
+    method,
+    body: jsonBody !== null ? JSON.stringify(jsonBody) : String.empty,
+  }).then((res) => res.json().then((data) => data))
+    .catch(err=>console.log(err));
+  return response;
+}
+ 
+
+  export const createApi=async () => {
+    const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
+    console.log(url)
     const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({}),
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS,GET',
+        'Content-type': 'application/json',
       },
-      method,
-      body: jsonBody !== null ? JSON.stringify(jsonBody) : String.empty,
-    }).then((res) => res.json().then((data) => data))
-      .catch(() => { this.flag = false; });
+    }).then(res=>res.text()).catch(err=>err);
     return response;
   }
+
+  
