@@ -5,6 +5,7 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/index.js',
+    indexcomment: './src/indexcomment.js',
     dom: './src/js/dom.js',
     Ls: './src/js/Ls.js',
     PokeAPi: './src/js/PokeApi.js',
@@ -55,7 +56,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename:'comment.html',
       template: './src/comment.html',
-      chunks:['commentDom']
+      chunks:['indexcomment']
     }),
   ],
 
