@@ -4,6 +4,7 @@ export const commentDom= async()=>{
     const baseUrl = `https://pokeapi.co/api/v2/pokemon/${params.id}`;
     
      const response= await fetchApi(baseUrl, 'GET')
+     console.log(response);
      const commentMainDiv= document.createElement('div');
      commentMainDiv.className="commentMainDiv"
      const imgDiv=document.createElement('div');
@@ -11,7 +12,12 @@ export const commentDom= async()=>{
      imgElem.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${params.id}.png`
      imgDiv.appendChild(imgElem);
      imgDiv.className="commentimg"
+     const imgTiltle= document.createElement('h3')
+     imgTiltle.textContent=response.name;
+     imgTiltle.classList="imgTiltle"
+
      commentMainDiv.appendChild(imgDiv)
+     commentMainDiv.appendChild(imgTiltle)
      document.querySelector('.container').appendChild(commentMainDiv);
 }
 
