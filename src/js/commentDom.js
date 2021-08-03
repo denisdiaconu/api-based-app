@@ -5,10 +5,12 @@ export const commentDom= async()=>{
     
      const response= await fetchApi(baseUrl, 'GET')
      const commentMainDiv= document.createElement('div');
+     commentMainDiv.className="commentMainDiv"
      const imgDiv=document.createElement('div');
      const imgElem=document.createElement('img');
      imgElem.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${params.id}.png`
      imgDiv.appendChild(imgElem);
+     imgDiv.className="commentimg"
      commentMainDiv.appendChild(imgDiv)
      document.querySelector('.container').appendChild(commentMainDiv);
 }
