@@ -44,12 +44,20 @@ export const commentDom= async()=>{
      descriptionDivSubPart2.appendChild(partFour);
      descriptionDiv.appendChild(clearDiv);
      descriptionDiv.appendChild(descriptionDivSubPart2);
+     
+     const commentDiv=document.createElement('div');
+     commentDiv.className="commentDiv";
+     const commentHead=document.createElement('h3');
+     commentHead.textContent="Comments(2)";
+     commentDiv.appendChild(commentHead)
+
 
      
 
      commentMainDiv.appendChild(imgDiv)
      commentMainDiv.appendChild(imgTiltle)
      commentMainDiv.appendChild(descriptionDiv)
+     commentMainDiv.appendChild(commentDiv)
      document.querySelector('.container').appendChild(commentMainDiv);
 }
 
