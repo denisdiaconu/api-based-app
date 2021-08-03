@@ -49,7 +49,7 @@ export const addToDom = (arr) => {
     comments.classList.add('comments');
     comments.textContent = 'Comments';
     comments.addEventListener('click', ()=>{
-      window.location="./comment.html";
+      window.location=`./comment.html?id=${num}`;
     })
 
     childdiv.appendChild(img);
