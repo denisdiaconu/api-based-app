@@ -1,15 +1,3 @@
-export const setStorage = () => {
-  let flag = -1;
-  if (!localStorage.getItem('likes')) {
-    localStorage.setItem('likes', '[]');
-    flag = 0;
-  }
-  if (!localStorage.getItem('appId')) {
-    localStorage.setItem('appId', '');
-    flag = 1;
-  }
-  return flag;
-};
 
 export const GETLIST = () => localStorage.getItem('likes');
 export const UPDATELIST = (list) => localStorage.setItem('likes', JSON.stringify(list));
