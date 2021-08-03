@@ -40,14 +40,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ashraffares/todolist "
+    "url": "https://github.com/denisdiaconu/api-based-app/tree/milestone"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ashraffares/todolist/issues"
-  },
   "babel": {
     "env": {
       "test": {
@@ -56,6 +53,5 @@
         ]
       }
     }
-  },
-  "homepage": "https://github.com/ashraffares/todolist#readme"
+  }
 }
