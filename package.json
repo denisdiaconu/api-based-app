@@ -35,7 +35,7 @@
     "test": "jest",
     "build": "webpack --progress --mode=production",
     "watch": "webpack --progress --watch",
-    "serve": "webpack serve --mode development --env development --open",
+    "server": "webpack serve --mode development --env development --open",
     "publish": "git subtree push --prefix dist origin gh-pages"
   },
   "repository": {

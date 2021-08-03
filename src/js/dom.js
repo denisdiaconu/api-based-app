@@ -3,6 +3,7 @@ import { like, lookup } from './Ls';
 
 export const increment = (e) => {
   const name = e.target.parentNode.children[0].textContent;
+  console.log(name)
   if (lookup(name) === false) {
     e.target.classList.add('redheart');
     const obj = e.target.parentNode.parentNode;
@@ -47,6 +48,9 @@ export const addToDom = (arr) => {
     const comments = document.createElement('button');
     comments.classList.add('comments');
     comments.textContent = 'Comments';
+    comments.addEventListener('click', ()=>{
+      window.location="./comment.html";
+    })
 
     childdiv.appendChild(img);
     childdiv.appendChild(nameAndLikes);
