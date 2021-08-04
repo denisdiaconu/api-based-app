@@ -5,7 +5,6 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/index.js',
-    indexcomment: './src/indexcomment.js',
     dom: './src/js/dom.js',
     Ls: './src/js/Ls.js',
     PokeAPi: './src/js/PokeApi.js',
@@ -51,12 +50,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename:'index.html',
       template: './src/index.html',
-      chunks:['index','Ls','PokeAPi','dom']
-    }),
-    new HtmlWebpackPlugin({
-      filename:'comment.html',
-      template: './src/comment.html',
-      chunks:['indexcomment']
+      chunks:['index','Ls','PokeAPi','dom', 'commentDom']
     }),
   ],
 
