@@ -49,8 +49,12 @@ export const addToDom = (arr) => {
     comments.classList.add('comments');
     comments.textContent = 'Comments';
     comments.addEventListener('click', ()=>{
-      let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=800,height=800,left=500,top=200`;
-      window.open(`./comment.html?id=${num}`, 'indexcomment', params);
+      // let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=800,height=800,left=500,top=200`;
+      // window.open(`./comment.html?id=${num}`, 'indexcomment', params);
+      var modal = document.getElementById("myModal");
+      modal.style.display = "block";
+      localStorage.setItem("param_id", num)
+      commentDom()
 
     })
 

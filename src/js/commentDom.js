@@ -1,16 +1,18 @@
 export const commentDom= async()=>{
     const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    const baseUrl = `https://pokeapi.co/api/v2/pokemon/${params.id}`;
+    // const params = Object.fromEntries(urlSearchParams.entries());
+    const params=localStorage.getItem("param_id")
+    const baseUrl = `https://pokeapi.co/api/v2/pokemon/${params}`;
+    console.log(baseUrl)
     
      let response= await fetchApi(baseUrl, 'GET', null)
      response=JSON.parse(response)
      const commentMainDiv= document.createElement('div');
-     commentMainDiv.className="commentMainDiv popup"
+     commentMainDiv.className="commentMainDiv modal-content"
      commentMainDiv.id="myPopup"
      const imgDiv=document.createElement('div');
      const imgElem=document.createElement('img');
-     imgElem.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${params.id}.png`
+     imgElem.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${params}.png`
      imgDiv.appendChild(imgElem);
      imgDiv.className="commentimg"
      const imgTiltle= document.createElement('h3')
@@ -96,8 +98,23 @@ export const commentDom= async()=>{
      commentMainDiv.appendChild(descriptionDiv)
      commentMainDiv.appendChild(commentDiv)
      commentMainDiv.appendChild(addComment);
-     document.querySelector('.container').appendChild(commentMainDiv);
+     const modal = document.getElementById("myModal");
+     modal.appendChild(commentMainDiv);
     // document.getElementById('mainDisplay').appendChild(commentMainDiv);
+     const closebtn=document.createElement('span')
+     closebtn.className="close"
+     closebtn.innerHTML="&times;"
+     closebtn.addEventListener('click', ()=>{
+      modal.style.display = "none";
+      document.querySelector('.modal').innerHTML="";
+     })
+     commentMainDiv.appendChild(closebtn)
+     window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+        document.querySelector('.modal').innerHTML="";
+      }
+    }
 
 }
 
@@ -116,6 +133,7 @@ const fetchApi=async (url, method, jsonBody = null) => {
   export const createApi=async () => {
     const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
     const response= await fetchApi(url, "POST", null)
+    console.log(response)
     localStorage.setItem('appId', response);
     return response;
   }
