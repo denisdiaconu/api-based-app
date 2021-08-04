@@ -65,7 +65,7 @@ body {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+
 
 /* Modal Content */
 .modal-content {
@@ -94,4 +94,51 @@ body {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+.commentMainDiv{
+  max-width: 550px;
+  margin: auto;
+  border: 1px solid black;
+    img{
+      width: 250px;
+      height: 100px;
+      display: block;
+      margin: auto;
+    }
+    h3{
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .descriptionDivSubPart1, .descriptionDivSubPart2{
+      width: 70%;
+      margin: auto;
+    }
+    .descriptionDivSubPart2{
+      padding-bottom: 50px;
+    }
+    .partOne{
+      float: left;
+    }
+    .partTwo{
+      float: right;
+    }
+    .clearDiv{
+      clear: both;
+      margin-bottom: 30px;
+    }
+
+    .commentDiv, .addComment{
+      width: 40%;
+      margin:0 auto 30px;
+      h2, .form-add{
+        text-align: left;
+      }
+
+      form div{
+        margin-bottom: 20px;
+      }
+
+    }
+
+  }
 }
