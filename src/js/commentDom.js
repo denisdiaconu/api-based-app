@@ -3,8 +3,8 @@ export const commentDom= async()=>{
     const params = Object.fromEntries(urlSearchParams.entries());
     const baseUrl = `https://pokeapi.co/api/v2/pokemon/${params.id}`;
     
-     const response= await fetchApi(baseUrl, 'GET')
-     console.log(response);
+     const response= await fetchApi(baseUrl, 'GET', null)
+    //  console.log(response);
      const commentMainDiv= document.createElement('div');
      commentMainDiv.className="commentMainDiv"
      const imgDiv=document.createElement('div');
@@ -100,34 +100,26 @@ export const commentDom= async()=>{
 
 const fetchApi=async (url, method, jsonBody = null) => {
   const response = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS,GET',
-    },
     method,
     body: jsonBody !== null ? JSON.stringify(jsonBody) : String.empty,
-  }).then((res) => res.json().then((data) => data))
-    .catch(err=>console.log(err));
+    headers: {
+      'Content-type': 'application/json',
+    },
+  }).then(res=>res.text()).catch(err=>err);
   return response;
 }
  
 
   export const createApi=async () => {
     const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({}),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    }).then(res=>res.text()).catch(err=>err);
+    const response= await fetchApi(url, "POST", null)
     localStorage.setItem('appId', response);
+    console.log(response)
     return response;
   }
 
- const addComments=()=>{
+ const addComments= async()=>{
+  const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
   const name=document.getElementById('name').value
   const insight=document.getElementById('insight').value
   if (name===null || insight===null || name==='' || insight===''){
@@ -135,4 +127,6 @@ const fetchApi=async (url, method, jsonBody = null) => {
     return false
   }
   const commentObj={"item_id": "item1","username": name,"comment": insight}
+  const res = await fetchApi(`${url}/${localStorage.getItem('appId')}/comments`, "POST", commentObj)
+  return res;
  }
