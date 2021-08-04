@@ -1,5 +1,5 @@
 import { like, lookup } from './Ls';
-// import { postLikes } from './InvolvementApi';
+import {commentDom, createApi, displayComment, getComments} from './commentDom'
 
 export const increment = (e) => {
   const name = e.target.parentNode.children[0].textContent;
@@ -49,7 +49,9 @@ export const addToDom = (arr) => {
     comments.classList.add('comments');
     comments.textContent = 'Comments';
     comments.addEventListener('click', ()=>{
-      window.location=`./comment.html?id=${num}`;
+      let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=800,height=800,left=500,top=200`;
+      window.open(`./comment.html?id=${num}`, 'indexcomment', params);
+
     })
 
     childdiv.appendChild(img);

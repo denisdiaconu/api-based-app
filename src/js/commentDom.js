@@ -5,9 +5,9 @@ export const commentDom= async()=>{
     
      let response= await fetchApi(baseUrl, 'GET', null)
      response=JSON.parse(response)
-    console.log(response);
      const commentMainDiv= document.createElement('div');
-     commentMainDiv.className="commentMainDiv"
+     commentMainDiv.className="commentMainDiv popup"
+     commentMainDiv.id="myPopup"
      const imgDiv=document.createElement('div');
      const imgElem=document.createElement('img');
      imgElem.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${params.id}.png`
@@ -36,13 +36,9 @@ export const commentDom= async()=>{
      const descriptionDivSubPart2=document.createElement('div')
      descriptionDivSubPart2.className="descriptionDivSubPart2"
      const partThree=document.createElement('span')
-    //  const partFour=document.createElement('span')
      partThree.textContent=`Weight: ${response.weight} `
      partThree.className="partOne"
-    //  partFour.className="partTwo"
-    //  partFour.textContent="Lenght: BBBB"
      descriptionDivSubPart2.appendChild(partThree)
-    //  descriptionDivSubPart2.appendChild(partFour);
      descriptionDiv.appendChild(clearDiv);
      descriptionDiv.appendChild(descriptionDivSubPart2);
      
@@ -101,6 +97,8 @@ export const commentDom= async()=>{
      commentMainDiv.appendChild(commentDiv)
      commentMainDiv.appendChild(addComment);
      document.querySelector('.container').appendChild(commentMainDiv);
+    // document.getElementById('mainDisplay').appendChild(commentMainDiv);
+
 }
 
 const fetchApi=async (url, method, jsonBody = null) => {
@@ -119,7 +117,6 @@ const fetchApi=async (url, method, jsonBody = null) => {
     const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
     const response= await fetchApi(url, "POST", null)
     localStorage.setItem('appId', response);
-    console.log(response)
     return response;
   }
 
@@ -133,20 +130,16 @@ const fetchApi=async (url, method, jsonBody = null) => {
   }
   const commentObj={"item_id": "item1","username": name,"comment": insight}
   const res = await fetchApi(`${url}/${localStorage.getItem('appId')}/comments`, "POST", commentObj)
-  console.log(res)
   await displayComment();
   return res;
  }
 
  export const getComments= async()=>{
   const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
-  
-   console.log(`${url}/${localStorage.getItem('appId')}/comments?item_id=item1`)
 
    try {
     const response= await fetch(`${url}/${localStorage.getItem('appId')}/comments?item_id=item1`)
     const comments = await response.json();
-    console.log(comments.length)
     return comments;
   } catch (error) {
     return error.JSON;
@@ -159,7 +152,6 @@ const fetchApi=async (url, method, jsonBody = null) => {
    if (comments.length >= 1){
      document.getElementById("commentHead").textContent=`Comments(${comments.length})`
      const lastComment=comments.slice(-1)[0];
-     console.log(lastComment)
      const commentItem=document.createElement("div");
      commentItem.textContent=lastComment.creation_date + " " + lastComment.username + " : " + lastComment.comment;
      document.getElementById('commentItems').appendChild(commentItem);
