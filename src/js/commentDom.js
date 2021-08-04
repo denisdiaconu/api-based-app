@@ -7,6 +7,9 @@ export const commentDom= async()=>{
     
      let response= await fetchApi(baseUrl, 'GET', null)
      response=JSON.parse(response)
+     const myModal= document.createElement("div");
+     myModal.className="modal"
+     myModal.id="myModal"
      const commentMainDiv= document.createElement('div');
      commentMainDiv.className="commentMainDiv modal-content"
      commentMainDiv.id="myPopup"
@@ -98,23 +101,20 @@ export const commentDom= async()=>{
      commentMainDiv.appendChild(descriptionDiv)
      commentMainDiv.appendChild(commentDiv)
      commentMainDiv.appendChild(addComment);
-     const modal = document.getElementById("myModal");
-     modal.appendChild(commentMainDiv);
-    // document.getElementById('mainDisplay').appendChild(commentMainDiv);
+
      const closebtn=document.createElement('span')
      closebtn.className="close"
      closebtn.innerHTML="&times;"
      closebtn.addEventListener('click', ()=>{
-      modal.style.display = "none";
-      document.querySelector('.modal').innerHTML="";
+      myModal.style.display = "none";
+  
      })
      commentMainDiv.appendChild(closebtn)
-     window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-        document.querySelector('.modal').innerHTML="";
-      }
-    }
+     window.addEventListener('click', ()=>{
+      myModal.style.display = "none";
+     })
+    myModal.appendChild(commentMainDiv);
+    document.getElementById('mainDisplay').appendChild(myModal);
 
 }
 
