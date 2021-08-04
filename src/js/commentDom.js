@@ -3,8 +3,9 @@ export const commentDom= async()=>{
     const params = Object.fromEntries(urlSearchParams.entries());
     const baseUrl = `https://pokeapi.co/api/v2/pokemon/${params.id}`;
     
-     const response= await fetchApi(baseUrl, 'GET', null)
-    //  console.log(response);
+     let response= await fetchApi(baseUrl, 'GET', null)
+     response=JSON.parse(response)
+    console.log(response);
      const commentMainDiv= document.createElement('div');
      commentMainDiv.className="commentMainDiv"
      const imgDiv=document.createElement('div');
@@ -48,8 +49,12 @@ export const commentDom= async()=>{
      const commentDiv=document.createElement('div');
      commentDiv.className="commentDiv";
      const commentHead=document.createElement('h3');
-     commentHead.textContent="Comments(2)";
+     commentHead.textContent="Comments";
+     commentHead.id="commentHead"
+     const commentItems= document.createElement("div");
+     commentItems.id="commentItems"
      commentDiv.appendChild(commentHead)
+     commentDiv.appendChild(commentItems)
 
 
      const addComment = document.createElement('div');
@@ -128,6 +133,8 @@ const fetchApi=async (url, method, jsonBody = null) => {
   }
   const commentObj={"item_id": "item1","username": name,"comment": insight}
   const res = await fetchApi(`${url}/${localStorage.getItem('appId')}/comments`, "POST", commentObj)
+  console.log(res)
+  await displayComment();
   return res;
  }
 
@@ -145,5 +152,17 @@ const fetchApi=async (url, method, jsonBody = null) => {
     return error.JSON;
   }
   
+ }
+
+ export const displayComment=async()=>{
+   const comments=await getComments();
+   if (comments.length >= 1){
+     document.getElementById("commentHead").textContent=`Comments(${comments.length})`
+     const lastComment=comments.slice(-1)[0];
+     console.log(lastComment)
+     const commentItem=document.createElement("div");
+     commentItem.textContent=lastComment.creation_date + " " + lastComment.username + " : " + lastComment.comment;
+     document.getElementById('commentItems').appendChild(commentItem);
+   }
  }
 
