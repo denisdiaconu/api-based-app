@@ -1,12 +1,31 @@
-import { saveAppId, savelikesApi } from './Ls';
+import { saveAppId } from './Ls';
 
 const baseUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
+
+export const errormsg = () => {
+  const errorBody = document.createElement('div');
+  errorBody.setAttribute('id', 'errorBody');
+
+  const closeBtn = document.createElement('span');
+  closeBtn.textContent = 'X';
+  closeBtn.setAttribute('id', 'closeError');
+  closeBtn.addEventListener('click', () => {
+    errorBody.remove();
+  });
+
+  const msg = document.createElement('span');
+  msg.textContent = 'Somthing went wrong please try again later!';
+
+  errorBody.append(closeBtn, msg);
+  const errorContainer = document.getElementById('errorContainer');
+  errorContainer.appendChild(errorBody);
+};
 
 export const displayLikes = (arr) => {
   const list = JSON.parse(arr);
   list.forEach((item) => {
-    const elementid = document.getElementById(item.item_id);
-    const elementclass = document.querySelector(`.${item.item_id}`);
+    const elementid = document.querySelector('#'.concat(item.item_id));
+    const elementclass = document.querySelector('.'.concat(item.item_id));
     elementclass.classList.add('redheart');
     elementid.textContent = `${item.likes} likes`;
   });
@@ -19,7 +38,8 @@ export const GetAppId = () => {
       'Content-Type': 'application/json',
     },
   }).then((response => response.text()))
-    .then((res) => saveAppId(res));
+    .then((res) => saveAppId(res))
+    .catch((err) => console.log(err));
 };
 
 export const getLikes = (appId) => {
@@ -30,9 +50,10 @@ export const getLikes = (appId) => {
       'Content-type': 'application/json',
     },
   }).then((response) => response.text())
-    .then((res) => {
-      savelikesApi(res);
-      displayLikes(res);
+    .then((res) => displayLikes(res))
+    .catch((err) => {
+      console.log(err);
+      errormsg();
     });
 };
 
@@ -45,5 +66,6 @@ export const postLikes = (name, appId) => {
     },
     body: JSON.stringify({ item_id: name }),
   }).then((response) => response.text())
-    .then((res) => console.log(res));
+    .then(() => getLikes(appId))
+    .catch((err) => console.log(`error: ${err}`));
 };

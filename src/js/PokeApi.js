@@ -13,6 +13,8 @@ const Poke = () => {
     .then((res) => {
       savePokemon(res.results);
       addToDom(res.results);
+      console.log(res);
+      console.log(res.results);
     });
 };
 
