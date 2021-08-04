@@ -22,10 +22,10 @@ export const commentDom= async()=>{
      descriptionDivSubPart1.className="descriptionDivSubPart1"
      const partOne=document.createElement('span')
      const partTwo=document.createElement('span')
-     partOne.textContent="Fuel: AAAAA"
+     partOne.textContent=`Base Exprience: ${response.base_experience} `
      partOne.className="partOne"
      partTwo.className="partTwo"
-     partTwo.textContent="Lenght: BBBB"
+     partTwo.textContent=`Height: ${response.height}`
      descriptionDivSubPart1.appendChild(partOne)
      descriptionDivSubPart1.appendChild(partTwo);
      descriptionDiv.appendChild(descriptionDivSubPart1);
@@ -35,13 +35,13 @@ export const commentDom= async()=>{
      const descriptionDivSubPart2=document.createElement('div')
      descriptionDivSubPart2.className="descriptionDivSubPart2"
      const partThree=document.createElement('span')
-     const partFour=document.createElement('span')
-     partThree.textContent="Fuel: AAAAA"
+    //  const partFour=document.createElement('span')
+     partThree.textContent=`Weight: ${response.weight} `
      partThree.className="partOne"
-     partFour.className="partTwo"
-     partFour.textContent="Lenght: BBBB"
+    //  partFour.className="partTwo"
+    //  partFour.textContent="Lenght: BBBB"
      descriptionDivSubPart2.appendChild(partThree)
-     descriptionDivSubPart2.appendChild(partFour);
+    //  descriptionDivSubPart2.appendChild(partFour);
      descriptionDiv.appendChild(clearDiv);
      descriptionDiv.appendChild(descriptionDivSubPart2);
      
@@ -68,6 +68,7 @@ export const commentDom= async()=>{
      const insightDiv = document.createElement('div');
      const insight = document.createElement('textarea');
      insight.name = 'insight';
+     insight.id="insight"
      insight.cols=20
      insight.rows=10
      insight.placeholder = 'Your Comment';
@@ -77,6 +78,9 @@ export const commentDom= async()=>{
      submitBtn.type = 'button';
      submitBtn.id = 'addcommentbtn';
      submitBtn.value = 'Comment';
+     submitBtn.addEventListener('click', function(){
+       addComments()
+     })
      submitBtnDiv.appendChild(submitBtn)
      formAdd.appendChild(NameDiv);
      formAdd.appendChild(insightDiv);
@@ -112,7 +116,6 @@ const fetchApi=async (url, method, jsonBody = null) => {
 
   export const createApi=async () => {
     const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
-    console.log(url)
     const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({}),
@@ -120,7 +123,16 @@ const fetchApi=async (url, method, jsonBody = null) => {
         'Content-type': 'application/json',
       },
     }).then(res=>res.text()).catch(err=>err);
+    localStorage.setItem('appId', response);
     return response;
   }
 
-  
+ const addComments=()=>{
+  const name=document.getElementById('name').value
+  const insight=document.getElementById('insight').value
+  if (name===null || insight===null || name==='' || insight===''){
+    alert("Please Provide a Value")
+    return false
+  }
+  const commentObj={"item_id": "item1","username": name,"comment": insight}
+ }
