@@ -7,6 +7,7 @@ export const commentDom= async()=>{
     
      let response= await fetchApi(baseUrl, 'GET', null)
      response=JSON.parse(response)
+     console.log(response)
      const myModal= document.createElement("div");
      myModal.className="modal"
      myModal.id="myModal"
@@ -20,6 +21,7 @@ export const commentDom= async()=>{
      imgDiv.className="commentimg"
      const imgTiltle= document.createElement('h3')
      imgTiltle.textContent=response.name;
+     console.log(response.name)
      imgTiltle.classList="imgTiltle"
 
      const descriptionDiv=document.createElement('div');
@@ -107,14 +109,20 @@ export const commentDom= async()=>{
      closebtn.innerHTML="&times;"
      closebtn.addEventListener('click', ()=>{
       myModal.style.display = "none";
+      myModal.parentNode.removeChild(myModal)
   
      })
      commentMainDiv.appendChild(closebtn)
-     window.addEventListener('click', ()=>{
-      myModal.style.display = "none";
+     window.addEventListener('click', (event)=>{
+      if (event.target == myModal) {
+        myModal.style.display = "none";
+        myModal.parentNode.removeChild(myModal)
+      }
      })
     myModal.appendChild(commentMainDiv);
     document.getElementById('mainDisplay').appendChild(myModal);
+    await createApi()
+    await displayComment()
 
 }
 
@@ -171,6 +179,7 @@ const fetchApi=async (url, method, jsonBody = null) => {
      document.getElementById("commentHead").textContent=`Comments(${comments.length})`
      const lastComment=comments.slice(-1)[0];
      const commentItem=document.createElement("div");
+     commentItem.className="commentItem"
      commentItem.textContent=lastComment.creation_date + " " + lastComment.username + " : " + lastComment.comment;
      document.getElementById('commentItems').appendChild(commentItem);
    }
