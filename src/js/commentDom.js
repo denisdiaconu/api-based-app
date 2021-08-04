@@ -130,3 +130,20 @@ const fetchApi=async (url, method, jsonBody = null) => {
   const res = await fetchApi(`${url}/${localStorage.getItem('appId')}/comments`, "POST", commentObj)
   return res;
  }
+
+ export const getComments= async()=>{
+  const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
+  
+   console.log(`${url}/${localStorage.getItem('appId')}/comments?item_id=item1`)
+
+   try {
+    const response= await fetch(`${url}/${localStorage.getItem('appId')}/comments?item_id=item1`)
+    const comments = await response.json();
+    console.log(comments.length)
+    return comments;
+  } catch (error) {
+    return error.JSON;
+  }
+  
+ }
+
