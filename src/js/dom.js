@@ -1,17 +1,20 @@
-import { like, lookup } from './Ls';
-// import { postLikes } from './InvolvementApi';
+import {
+  lookup, getId,
+} from './Ls';
+import { postLikes, getLikes } from './InvolvementApi';
 
-export const increment = (e) => {
+export const addlike = (e) => {
+  const id = getId();
   const name = e.target.parentNode.children[0].textContent;
   if (lookup(name) === false) {
     e.target.classList.add('redheart');
     const obj = e.target.parentNode.parentNode;
-    like(name);
     const counter = obj.querySelector('.counter');
-    const increment = (parseInt(counter.textContent.split(' ')[0], 10) + 1).toString();
-    counter.textContent = `${increment} likes`;
-    // postLikes(name);
+    const num = parseInt(counter.textContent.split(' ')[0], 10);
+    counter.textContent = `${num + 1} likes`;
   }
+  postLikes(name, id);
+  getLikes(id);
 };
 
 export const addToDom = (arr) => {
@@ -32,9 +35,9 @@ export const addToDom = (arr) => {
     h3.textContent = element.name;
 
     const i = document.createElement('i');
-    i.classList.add('far', 'fa-heart', 'heart');
+    i.classList.add('far', 'fa-heart', 'heart', element.name);
     i.addEventListener('click', (e) => {
-      increment(e);
+      addlike(e);
     });
 
     nameAndLikes.appendChild(h3);
@@ -42,7 +45,8 @@ export const addToDom = (arr) => {
 
     const span = document.createElement('span');
     span.classList.add('counter');
-    span.textContent = '5 likes';
+    span.textContent = '0 likes';
+    span.setAttribute('id', element.name);
 
     const comments = document.createElement('button');
     comments.classList.add('comments');
