@@ -1,10 +1,11 @@
-import { like, lookup } from './Ls';
-import {commentDom, createApi, displayComment, getComments} from './commentDom'
 import {
   getId,
 } from './Ls';
-import { postLikes } from './InvolvementApi';
+import {
+  commentDom, displayComment,
+} from './commentDom';
 
+import { postLikes } from './InvolvementApi';
 
 export const popUpCard = (overlayContainer) => {
   const overlayCard = document.createElement('div');
@@ -17,7 +18,6 @@ export const popUpCard = (overlayContainer) => {
     overlayContainer.removeAttribute('class');
     document.getElementById('overlay-card').remove();
   });
-
 };
 
 export const addlike = (e) => {
@@ -26,31 +26,30 @@ export const addlike = (e) => {
 
   e.target.classList.add('redheart');
   postLikes(name, id);
-
 };
 
 export const addToDom = (arr) => {
-  const nav=document.createElement('ul')
-  nav.className="nav";
-  nav.id="nav";
-  const navItemHome=document.createElement('li')
-  navItemHome.className="item"
-  navItemHome.textContent="Home"
-  const navItemCount=document.createElement('li')
-  navItemCount.className="item"
-  
-  const navItemAbout=document.createElement('li')
-  navItemAbout.className="item"
-  navItemAbout.textContent="About"
-  navItemAbout.className="right";
-  nav.appendChild(navItemHome)
-  nav.appendChild(navItemCount)
-  nav.appendChild(navItemAbout)
-  
+  const nav = document.createElement('ul');
+  nav.className = 'nav';
+  nav.id = 'nav';
+  const navItemHome = document.createElement('li');
+  navItemHome.className = 'item';
+  navItemHome.textContent = 'Home';
+  const navItemCount = document.createElement('li');
+  navItemCount.className = 'item';
+
+  const navItemAbout = document.createElement('li');
+  navItemAbout.className = 'item';
+  navItemAbout.textContent = 'About';
+  navItemAbout.className = 'right';
+  nav.appendChild(navItemHome);
+  nav.appendChild(navItemCount);
+  nav.appendChild(navItemAbout);
+
   document.getElementById('mainDisplay').appendChild(nav);
 
   const div = document.createElement('div');
-  div.id="list"
+  div.id = 'list';
   arr.forEach((element, index) => {
     const childdiv = document.createElement('div');
     childdiv.classList.add('card');
@@ -65,7 +64,7 @@ export const addToDom = (arr) => {
 
     const h3 = document.createElement('h3');
     h3.textContent = element.name;
-    navItemCount.textContent=`Pokeapi (${localStorage.getItem('count')})`
+    navItemCount.textContent = `Pokeapi (${localStorage.getItem('count')})`;
 
     const i = document.createElement('i');
     i.classList.add('far', 'fa-heart', 'heart', element.name);
@@ -85,17 +84,13 @@ export const addToDom = (arr) => {
     comments.classList.add('comments');
     comments.textContent = 'Comments';
 
-    comments.addEventListener('click', async ()=>{
-      // let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=800,height=800,left=500,top=200`;
-      // window.open(`./comment.html?id=${num}`, 'indexcomment', params);
-   
-      localStorage.setItem("param_id", num)
-      await commentDom()
-      var modal = document.getElementById("myModal");
-      modal.style.display = "block";
-      await displayComment()
-
-    })
+    comments.addEventListener('click', async () => {
+      localStorage.setItem('param_id', num);
+      await commentDom();
+      const modal = document.getElementById('myModal');
+      modal.style.display = 'block';
+      await displayComment();
+    });
 
     comments.setAttribute('id', index);
 
