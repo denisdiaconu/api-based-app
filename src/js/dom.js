@@ -70,8 +70,9 @@ export const addToDom = (arr) => {
    
       localStorage.setItem("param_id", num)
       await commentDom()
-         var modal = document.getElementById("myModal");
+      var modal = document.getElementById("myModal");
       modal.style.display = "block";
+      await displayComment()
 
     })
 

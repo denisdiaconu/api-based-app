@@ -56,8 +56,13 @@ export const commentDom= async()=>{
      commentHead.id="commentHead"
      const commentItems= document.createElement("div");
      commentItems.id="commentItems"
+     const commentItemSubDiv=document.createElement("div");
+     commentItemSubDiv.className="commentItemSubDiv"
+     commentItemSubDiv.id="commentItemSubDiv"
      commentDiv.appendChild(commentHead)
+     commentItems.appendChild(commentItemSubDiv)
      commentDiv.appendChild(commentItems)
+
 
 
      const addComment = document.createElement('div');
@@ -110,19 +115,23 @@ export const commentDom= async()=>{
      closebtn.addEventListener('click', ()=>{
       myModal.style.display = "none";
       myModal.parentNode.removeChild(myModal)
-  
+      if(document.getElementById('commentItems') !== null){
+        document.getElementById('commentItems').textContent=""
+      }
      })
      commentMainDiv.appendChild(closebtn)
      window.addEventListener('click', (event)=>{
       if (event.target == myModal) {
         myModal.style.display = "none";
         myModal.parentNode.removeChild(myModal)
+        if(document.getElementById('commentItems') !== null){
+          document.getElementById('commentItems').textContent=""
+        }
       }
      })
     myModal.appendChild(commentMainDiv);
     document.getElementById('mainDisplay').appendChild(myModal);
     await createApi()
-    await displayComment()
 
 }
 
@@ -155,8 +164,8 @@ const fetchApi=async (url, method, jsonBody = null) => {
     return false
   }
   const commentObj={"item_id": "item1","username": name,"comment": insight}
-  const res = await fetchApi(`${url}/p0IRWNkFCp5mj1BYqr8K/comments`, "POST", commentObj)
-  await displayComment();
+  const res = await fetchApi(`${url}/YIjg3yIZT4F7nzTzgVCU/comments`, "POST", commentObj)
+  await displayComment()
   return res;
  }
 
@@ -166,24 +175,34 @@ const fetchApi=async (url, method, jsonBody = null) => {
   const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 
    try {
-    const response= await fetch(`${url}/p0IRWNkFCp5mj1BYqr8K/comments?item_id=item1`)
+    const response= await fetch(`${url}/YIjg3yIZT4F7nzTzgVCU/comments?item_id=item1`)
     const comments = await response.json();
+    console.log(comments)
     return comments;
   } catch (error) {
     return error.JSON;
   }
+
   
  }
 
  export const displayComment=async()=>{
+  if(document.getElementById('commentItems') !== null){
+    document.getElementById('commentItems').textContent=""
+  }
    const comments=await getComments();
    if (comments.length >= 1){
      document.getElementById("commentHead").textContent=`Comments(${comments.length})`
-     const lastComment=comments.slice(-1)[0];
-     const commentItem=document.createElement("div");
-     commentItem.className="commentItem"
-     commentItem.textContent=lastComment.creation_date + " " + lastComment.username + " : " + lastComment.comment;
-     document.getElementById('commentItems').appendChild(commentItem);
+    
+     comments.forEach(element => {
+  const commentItem=document.createElement("div");
+  commentItem.className="commentItem"
+  commentItem.id="commentItem"
+  commentItem.textContent=element.creation_date + " " + element.username + " : " + element.comment;
+  document.getElementById('commentItems').appendChild(commentItem);
+       
+     });
    }
- }
 
+
+ }

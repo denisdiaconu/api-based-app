@@ -8,7 +8,8 @@ module.exports = {
     dom: './src/js/dom.js',
     Ls: './src/js/Ls.js',
     PokeAPi: './src/js/PokeApi.js',
-    commentDom:'./src/js/commentDom.js'
+    commentDom:'./src/js/commentDom.js',
+    InvolvementApi:'./src/js/InvolvementApi.js'
   },
   output: {
     filename: '[name].bundle.js',
@@ -50,7 +51,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename:'index.html',
       template: './src/index.html',
-      chunks:['index','Ls','PokeAPi','dom', 'commentDom']
+      chunks:['index','Ls','PokeAPi','dom', 'commentDom', 'InvolvementApi']
     }),
   ],
 
