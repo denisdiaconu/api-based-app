@@ -38,8 +38,7 @@ export const GetAppId = () => {
       'Content-Type': 'application/json',
     },
   }).then((response => response.text()))
-    .then((res) => saveAppId(res))
-    .catch((err) => console.log(err));
+    .then((res) => saveAppId(res));
 };
 
 export const getLikes = (appId) => {
@@ -51,8 +50,7 @@ export const getLikes = (appId) => {
     },
   }).then((response) => response.text())
     .then((res) => displayLikes(res))
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       errormsg();
     });
 };
@@ -66,6 +64,5 @@ export const postLikes = (name, appId) => {
     },
     body: JSON.stringify({ item_id: name }),
   }).then((response) => response.text())
-    .then(() => getLikes(appId))
-    .catch((err) => console.log(`error: ${err}`));
+    .then(() => getLikes(appId));
 };

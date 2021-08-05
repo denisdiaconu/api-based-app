@@ -174,7 +174,6 @@ const fetchApi=async (url, method, jsonBody = null) => {
    //p0IRWNkFCp5mj1BYqr8K
    //${localStorage.getItem('appId')}
   const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
-  console.log(`${url}/YIjg3yIZT4F7nzTzgVCU/comments?item_id=item_${localStorage.getItem("param_id")}`)
    try {
   
       

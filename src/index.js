@@ -5,7 +5,6 @@ import {
 import { GetAppId, getLikes } from './js/InvolvementApi';
 import Poke from './js/PokeApi';
 
-
 setStorage();
 
 const id = getId();
@@ -15,8 +14,4 @@ if (!id) {
   getLikes(id);
 }
 
-
 Poke();
-
-
-

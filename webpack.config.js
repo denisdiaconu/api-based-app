@@ -8,8 +8,8 @@ module.exports = {
     dom: './src/js/dom.js',
     Ls: './src/js/Ls.js',
     PokeAPi: './src/js/PokeApi.js',
-    commentDom:'./src/js/commentDom.js',
-    InvolvementApi:'./src/js/InvolvementApi.js'
+    commentDom: './src/js/commentDom.js',
+    InvolvementApi: './src/js/InvolvementApi.js',
   },
   output: {
     filename: '[name].bundle.js',
@@ -26,11 +26,11 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
-          "style-loader",
+          'style-loader',
           // Translates CSS into CommonJS
-          "css-loader",
+          'css-loader',
           // Compiles Sass to CSS
-          "sass-loader",
+          'sass-loader',
         ],
       },
       {
@@ -49,9 +49,9 @@ module.exports = {
   devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      filename:'index.html',
+      filename: 'index.html',
       template: './src/index.html',
-      chunks:['index','Ls','PokeAPi','dom', 'commentDom', 'InvolvementApi']
+      chunks: ['index', 'Ls', 'PokeAPi', 'dom', 'commentDom', 'InvolvementApi'],
     }),
   ],
 
