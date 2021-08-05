@@ -102,4 +102,16 @@ export const addToDom = (arr) => {
     div.appendChild(childdiv);
     document.getElementById('mainDisplay').appendChild(div);
   });
+  const footer = document.createElement('footer');
+  footer.classList.add('footer');
+  const div1 = document.createElement('div');
+  div1.classList.add('div1');
+  const div2 = document.createElement('div');
+  div2.classList.add('div2');
+  const htext = document.createElement('h5');
+  htext.textContent = 'Created by Tedros and Denis';
+  document.body.append(footer);
+  footer.append(div1);
+  div1.append(htext);
+  footer.append(div2);
 };
