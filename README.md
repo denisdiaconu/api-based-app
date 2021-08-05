@@ -18,33 +18,34 @@
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps on the command line.
-
+> Clone the project from it's github repo.
 ```bash
-
-  # Clone the project from it's github repo.
 
   $ git clone https://github.com/denisdiaconu/api-based-app.git
   
 ```
 
-
+> Change directory to the root of project
 ```bash
-
-  # Change directory to the root of project
 
   $ cd api-based-app
   
   ```
   
+> Install all dev dependencies
   ```bash
 
-  # Install all dev dependencies
-
   $ npm install
-    
-  $ npm serve
 
 ```
+
+> Run the server
+  ```bash
+
+  $ npm server
+
+```
+
 
 ## Authors
 
