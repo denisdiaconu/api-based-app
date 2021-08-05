@@ -195,7 +195,7 @@ const fetchApi=async (url, method, jsonBody = null) => {
      document.getElementById("commentHead").textContent=`Comments(${comments.length})`
     
      comments.forEach(element => {
-  const commentItem=document.createElement("div");
+  const commentItem=document.createElement("p");
   commentItem.className="commentItem"
   commentItem.id="commentItem"
   commentItem.textContent=element.creation_date + " " + element.username + " : " + element.comment;

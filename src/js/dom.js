@@ -30,7 +30,27 @@ export const addlike = (e) => {
 };
 
 export const addToDom = (arr) => {
-  const div = document.getElementById('list');
+  const nav=document.createElement('ul')
+  nav.className="nav";
+  nav.id="nav";
+  const navItemHome=document.createElement('li')
+  navItemHome.className="item"
+  navItemHome.textContent="Home"
+  const navItemCount=document.createElement('li')
+  navItemCount.className="item"
+  
+  const navItemAbout=document.createElement('li')
+  navItemAbout.className="item"
+  navItemAbout.textContent="About"
+  navItemAbout.className="right";
+  nav.appendChild(navItemHome)
+  nav.appendChild(navItemCount)
+  nav.appendChild(navItemAbout)
+  
+  document.getElementById('mainDisplay').appendChild(nav);
+
+  const div = document.createElement('div');
+  div.id="list"
   arr.forEach((element, index) => {
     const childdiv = document.createElement('div');
     childdiv.classList.add('card');
@@ -45,6 +65,7 @@ export const addToDom = (arr) => {
 
     const h3 = document.createElement('h3');
     h3.textContent = element.name;
+    navItemCount.textContent=`Pokeapi (${localStorage.getItem('count')})`
 
     const i = document.createElement('i');
     i.classList.add('far', 'fa-heart', 'heart', element.name);
@@ -84,5 +105,6 @@ export const addToDom = (arr) => {
     childdiv.appendChild(comments);
 
     div.appendChild(childdiv);
+    document.getElementById('mainDisplay').appendChild(div);
   });
 };

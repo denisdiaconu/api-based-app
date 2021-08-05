@@ -77,6 +77,47 @@ button,
   width: 100%;
   position: relative;
   z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    width: 90%;
+    position: fixed;
+    left: 50%;
+    top: 1%;
+    transform: translate(-50%,-50%);
+    margin-top: 10px;
+   
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+  .right{
+    float: right;
+  }
+  
+  .active {
+    background-color: #04AA6D;
+  }
 
   #list {
     width: 90%;
@@ -84,7 +125,7 @@ button,
     flex-wrap: wrap;
     justify-content: center;
     margin: auto;
-
+    margin-top: 50px;
     .card {
       width: 25%;
       margin: 20px;
@@ -213,6 +254,7 @@ button,
 .commentItem{
   margin-bottom: 15px;
   text-align: left;
+ 
 }
   }
 }

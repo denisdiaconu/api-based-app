@@ -14,6 +14,8 @@ const Poke = () => {
       savePokemon(res.results);
       addToDom(res.results);
       console.log(res);
+      localStorage.setItem('count', res.count)
+      console.log(res.count)
       console.log(res.results);
     });
 };
