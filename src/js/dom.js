@@ -1,23 +1,37 @@
 import { like, lookup } from './Ls';
 import {commentDom, createApi, displayComment, getComments} from './commentDom'
+import {
+  getId,
+} from './Ls';
+import { postLikes } from './InvolvementApi';
 
-export const increment = (e) => {
+
+export const popUpCard = (overlayContainer) => {
+  const overlayCard = document.createElement('div');
+  overlayCard.setAttribute('id', 'overlay-card');
+
+  const closePopUp = document.createElement('span');
+  closePopUp.textContent = 'X';
+  closePopUp.setAttribute('id', 'closePopUp');
+  closePopUp.addEventListener('click', () => {
+    overlayContainer.removeAttribute('class');
+    document.getElementById('overlay-card').remove();
+  });
+
+};
+
+export const addlike = (e) => {
+  const id = getId();
   const name = e.target.parentNode.children[0].textContent;
-  console.log(name)
-  if (lookup(name) === false) {
-    e.target.classList.add('redheart');
-    const obj = e.target.parentNode.parentNode;
-    like(name);
-    const counter = obj.querySelector('.counter');
-    const increment = (parseInt(counter.textContent.split(' ')[0], 10) + 1).toString();
-    counter.textContent = `${increment} likes`;
-    // postLikes(name);
-  }
+
+  e.target.classList.add('redheart');
+  postLikes(name, id);
+
 };
 
 export const addToDom = (arr) => {
   const div = document.getElementById('list');
-  arr.forEach(element => {
+  arr.forEach((element, index) => {
     const childdiv = document.createElement('div');
     childdiv.classList.add('card');
 
@@ -33,9 +47,9 @@ export const addToDom = (arr) => {
     h3.textContent = element.name;
 
     const i = document.createElement('i');
-    i.classList.add('far', 'fa-heart', 'heart');
+    i.classList.add('far', 'fa-heart', 'heart', element.name);
     i.addEventListener('click', (e) => {
-      increment(e);
+      addlike(e);
     });
 
     nameAndLikes.appendChild(h3);
@@ -43,11 +57,13 @@ export const addToDom = (arr) => {
 
     const span = document.createElement('span');
     span.classList.add('counter');
-    span.textContent = '5 likes';
+    span.textContent = '0 likes';
+    span.setAttribute('id', element.name);
 
     const comments = document.createElement('button');
     comments.classList.add('comments');
     comments.textContent = 'Comments';
+
     comments.addEventListener('click', async ()=>{
       // let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=800,height=800,left=500,top=200`;
       // window.open(`./comment.html?id=${num}`, 'indexcomment', params);
@@ -58,6 +74,8 @@ export const addToDom = (arr) => {
       modal.style.display = "block";
 
     })
+
+    comments.setAttribute('id', index);
 
     childdiv.appendChild(img);
     childdiv.appendChild(nameAndLikes);

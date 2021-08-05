@@ -1,32 +1,10 @@
-
-export const GETLIST = () => localStorage.getItem('likes');
-export const UPDATELIST = (list) => localStorage.setItem('likes', JSON.stringify(list));
-export const like = (name) => {
-  const list = JSON.parse(GETLIST());
-  const OBJ = {
-    name,
-  };
-
-  list.push(OBJ);
-  UPDATELIST(list);
+export const setStorage = () => {
+  if (!localStorage.getItem('appId')) {
+    localStorage.setItem('appId', '');
+  }
 };
 
-export const lookup = (name) => {
-  let target = false;
-  const list = JSON.parse(GETLIST());
-  list.forEach(element => {
-    if (element.name === name) {
-      target = true;
-    }
-  });
-  return target;
-};
-
-export const unlike = (name) => {
-  const list = JSON.parse(GETLIST());
-  const newlist = list.filter(item => item !== name);
-  UPDATELIST(newlist);
-};
+export const getId = () => localStorage.getItem(('appId'));
 
 export const saveAppId = (id) => {
   if (!localStorage.getItem('appId')) {
@@ -34,4 +12,5 @@ export const saveAppId = (id) => {
   }
 };
 
-export const getId = () => localStorage.getItem(('appId'));
+export const savePokemon = (arr) => localStorage.setItem('Pokemone', JSON.stringify(arr));
+export const getPokemon = () => JSON.parse(localStorage.getItem('Pokemone')) || [];
