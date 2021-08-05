@@ -1,12 +1,17 @@
-# Leaderboard
+# Api-Based-Website
 
-> I built a api-based-website that displays a list of pokemons. 
+> We built a api-based-website that displays a list of pokemons. The webapp is composed by 2 interfaces:
+> 
+-  The home page displaying a list of pokemons.
+-  The popup window with data about the pokemon and a comment section.
 
 ## Built With
 
 - JavaScript
 - HTML
 - CSS
+- Webpack
+- Jest
 
 
 
@@ -19,10 +24,19 @@ To get a local copy up and running follow these simple example steps on the comm
   # Clone the project from it's github repo.
 
   $ git clone https://github.com/denisdiaconu/api-based-app.git
+  
+```
+
+
+```bash
 
   # Change directory to the root of project
 
   $ cd api-based-app
+  
+  ```
+  
+  ```bash
 
   # Install all dev dependencies
 
