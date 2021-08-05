@@ -163,7 +163,8 @@ const fetchApi=async (url, method, jsonBody = null) => {
     alert("Please Provide a Value")
     return false
   }
-  const commentObj={"item_id": "item1","username": name,"comment": insight}
+  const commentObj={"item_id": `item_${localStorage.getItem("param_id")}`,"username": name,"comment": insight}
+  console.log(commentObj)
   const res = await fetchApi(`${url}/YIjg3yIZT4F7nzTzgVCU/comments`, "POST", commentObj)
   await displayComment()
   return res;
@@ -173,9 +174,11 @@ const fetchApi=async (url, method, jsonBody = null) => {
    //p0IRWNkFCp5mj1BYqr8K
    //${localStorage.getItem('appId')}
   const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
-
+  console.log(`${url}/YIjg3yIZT4F7nzTzgVCU/comments?item_id=item_${localStorage.getItem("param_id")}`)
    try {
-    const response= await fetch(`${url}/YIjg3yIZT4F7nzTzgVCU/comments?item_id=item1`)
+  
+      
+    const response= await fetch(`${url}/YIjg3yIZT4F7nzTzgVCU/comments?item_id=item_${localStorage.getItem("param_id")}`)
     const comments = await response.json();
     console.log(comments)
     return comments;
@@ -191,7 +194,8 @@ const fetchApi=async (url, method, jsonBody = null) => {
     document.getElementById('commentItems').textContent=""
   }
    const comments=await getComments();
-   if (comments.length >= 1){
+   if (comments.length >= 1 && comments !== undefined){
+     console.log(comments)
      document.getElementById("commentHead").textContent=`Comments(${comments.length})`
     
      comments.forEach(element => {
