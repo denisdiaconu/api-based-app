@@ -1,0 +1,121 @@
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#errorBody {
+  position: relative;
+  background-color: #fff3cd;
+  border: 2px solid #ffeeba;
+  color: #856404;
+  padding: 15px;
+  align-items: center;
+}
+
+#closeError {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.overlay {
+  display: block;
+  position: fixed; /* Sit on top of the page content */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+#overlay-card {
+  position: relative;
+  width: 60%;
+  height: 100%;
+  margin: auto;
+  background-color: #f2f2f2;
+  border-radius: 15px;
+  border-top: 3px solid green;
+}
+
+#closePopUp {
+  position: absolute;
+  right: 15px;
+}
+
+#info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#form {
+  width: 60%;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #ddd;
+  border-radius: 5px;
+  border-top: 2px solid green;
+}
+
+#form > input,
+textarea,
+button,
+#nameInput {
+  width: 100%;
+  padding: 5px 0;
+  margin: 5px 0;
+}
+
+#mainDisplay {
+  width: 100%;
+
+  #list {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+
+    .card {
+      width: 25%;
+      margin: 20px;
+      padding: 10px;
+      border: 1px solid #aaa;
+
+      .image {
+        width: 100%;
+      }
+
+      .nameAndLikes {
+        display: flex;
+        justify-content: space-between;
+
+        .heart {
+          cursor: pointer;
+        }
+
+        .redheart {
+          color: plum;
+        }
+      }
+
+      .counter {
+        display: block;
+        text-align: end;
+      }
+
+      .comments {
+        width: 100%;
+        padding: 5px;
+        margin-top: 10px;
+      }
+    }
+  }
+}
