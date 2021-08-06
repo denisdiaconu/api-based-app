@@ -2,17 +2,15 @@ import { saveAppId } from './Ls';
 
 const baseUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 
-
 export const displayLikes = async (arr) => {
   const list = JSON.parse(arr);
   list.forEach((item) => {
     const elementid = document.querySelector('#'.concat(item.item_id));
     const elementclass = document.querySelector('.'.concat(item.item_id));
-    if (elementclass !== null){
+    if (elementclass !== null) {
       elementclass.classList.add('redheart');
       elementid.textContent = `${item.likes} likes`;
     }
-  
   });
 };
 
@@ -26,20 +24,16 @@ export const GetAppId = () => {
     .then((res) => saveAppId(res));
 };
 
-export const getLikes = async (appId) => {
-  const res=await fetch(`${baseUrl}hHoFD9j03SveUto9LYCt/likes`, {
+export const getLikes = async () => {
+  const res = await fetch(`${baseUrl}hHoFD9j03SveUto9LYCt/likes`, {
     method: 'GET',
     mode: 'cors',
     headers: {
       'Content-type': 'application/json',
     },
   }).then((response) => response.text())
-    .catch(() => {
-      errormsg();
-    });
-    if(res !==null || res!== undefined)
-    displayLikes(res)
-
+    .catch(err => err.JSON);
+  if (res !== null || res !== undefined) displayLikes(res);
 };
 
 export const postLikes = (name, appId) => {

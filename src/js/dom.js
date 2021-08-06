@@ -28,7 +28,7 @@ export const addlike = (e) => {
   postLikes(name, id);
 };
 
-export const addToDom =async (arr) => {
+export const addToDom = async (arr) => {
   const nav = document.createElement('ul');
   nav.className = 'nav';
   nav.id = 'nav';
@@ -51,7 +51,7 @@ export const addToDom =async (arr) => {
   const div = document.createElement('div');
   div.id = 'list';
   const baseUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
-  const response= await fetch(`${baseUrl}hHoFD9j03SveUto9LYCt/likes`).then(res=>res.json()).catch(err=>err)
+  const response = await fetch(`${baseUrl}hHoFD9j03SveUto9LYCt/likes`).then(res => res.json()).catch(err => err);
   arr.forEach((element, index) => {
     const childdiv = document.createElement('div');
     childdiv.classList.add('card');
@@ -77,19 +77,15 @@ export const addToDom =async (arr) => {
     nameAndLikes.appendChild(h3);
     nameAndLikes.appendChild(i);
 
-   
-
     const span = document.createElement('span');
     span.classList.add('counter');
     span.textContent = '0 likes';
     span.setAttribute('id', element.name);
-    if(response !==null || res!== undefined){
-      response.forEach(ele=>{
-        if (ele.item_id===element.name)
-        span.textContent = `${ele.likes} likes`;
-      })
+    if (response !== null || response !== undefined) {
+      response.forEach(ele => {
+        if (ele.item_id === element.name) span.textContent = `${ele.likes} likes`;
+      });
     }
-   
 
     const comments = document.createElement('button');
     comments.classList.add('comments');
