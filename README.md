@@ -17,6 +17,10 @@
 ## 🔴 Live Demo <a name = "live"></a>
 **Click [here](https://rawcdn.githack.com/denisdiaconu/api-based-app/301539db7f133befc5d56fa0cd32c1e95c8a1eac/src/index.html) in order to see a Live Demo of this project.**
 
+## 🔴 Video <a name = "here"></a>
+**Click [here](https://drive.google.com/file/d/1574wmV-qPD5crDikawYpudwstnuhaOLl/view?usp=drivesdk) in order to see the video of this project.**
+
+
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps on the command line.
