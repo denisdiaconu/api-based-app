@@ -2,32 +2,15 @@ import { saveAppId } from './Ls';
 
 const baseUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
 
-export const errormsg = () => {
-  const errorBody = document.createElement('div');
-  errorBody.setAttribute('id', 'errorBody');
-
-  const closeBtn = document.createElement('span');
-  closeBtn.textContent = 'X';
-  closeBtn.setAttribute('id', 'closeError');
-  closeBtn.addEventListener('click', () => {
-    errorBody.remove();
-  });
-
-  const msg = document.createElement('span');
-  msg.textContent = 'Somthing went wrong please try again later!';
-
-  errorBody.append(closeBtn, msg);
-  const errorContainer = document.getElementById('errorContainer');
-  errorContainer.appendChild(errorBody);
-};
-
-export const displayLikes = (arr) => {
+export const displayLikes = async (arr) => {
   const list = JSON.parse(arr);
   list.forEach((item) => {
     const elementid = document.querySelector('#'.concat(item.item_id));
     const elementclass = document.querySelector('.'.concat(item.item_id));
-    elementclass.classList.add('redheart');
-    elementid.textContent = `${item.likes} likes`;
+    if (elementclass !== null) {
+      elementclass.classList.add('redheart');
+      elementid.textContent = `${item.likes} likes`;
+    }
   });
 };
 
@@ -38,27 +21,23 @@ export const GetAppId = () => {
       'Content-Type': 'application/json',
     },
   }).then((response => response.text()))
-    .then((res) => saveAppId(res))
-    .catch((err) => console.log(err));
+    .then((res) => saveAppId(res));
 };
 
-export const getLikes = (appId) => {
-  fetch(`${baseUrl}${appId}/likes`, {
+export const getLikes = async () => {
+  const res = await fetch(`${baseUrl}hHoFD9j03SveUto9LYCt/likes`, {
     method: 'GET',
     mode: 'cors',
     headers: {
       'Content-type': 'application/json',
     },
   }).then((response) => response.text())
-    .then((res) => displayLikes(res))
-    .catch((err) => {
-      console.log(err);
-      errormsg();
-    });
+    .catch(err => err.JSON);
+  if (res !== null || res !== undefined) displayLikes(res);
 };
 
 export const postLikes = (name, appId) => {
-  fetch(`${baseUrl}${appId}/likes`, {
+  fetch(`${baseUrl}hHoFD9j03SveUto9LYCt/likes`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -66,6 +45,5 @@ export const postLikes = (name, appId) => {
     },
     body: JSON.stringify({ item_id: name }),
   }).then((response) => response.text())
-    .then(() => getLikes(appId))
-    .catch((err) => console.log(`error: ${err}`));
+    .then(() => getLikes(appId));
 };
