@@ -14,6 +14,8 @@
 - Jest
 
 
+## 🔴 Live Demo <a name = "live"></a>
+**Click [here](https://rawcdn.githack.com/denisdiaconu/api-based-app/301539db7f133befc5d56fa0cd32c1e95c8a1eac/src/index.html) in order to see a Live Demo of this project.**
 
 ## Getting Started
 
