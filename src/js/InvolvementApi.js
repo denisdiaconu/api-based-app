@@ -41,7 +41,7 @@ export const GetAppId = () => {
     .then((res) => saveAppId(res));
 };
 
-export const getLikes = (appId) => {
+export const getLikes = async (appId) => {
   fetch(`${baseUrl}${appId}/likes`, {
     method: 'GET',
     mode: 'cors',

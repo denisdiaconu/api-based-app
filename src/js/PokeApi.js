@@ -13,7 +13,6 @@ const Poke = () => {
     .then((res) => {
       savePokemon(res.results);
       addToDom(res.results);
-
       localStorage.setItem('count', res.count);
     });
 };

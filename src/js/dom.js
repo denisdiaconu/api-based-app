@@ -28,7 +28,7 @@ export const addlike = (e) => {
   postLikes(name, id);
 };
 
-export const addToDom = (arr) => {
+export const addToDom =async (arr) => {
   const nav = document.createElement('ul');
   nav.className = 'nav';
   nav.id = 'nav';
@@ -50,6 +50,11 @@ export const addToDom = (arr) => {
 
   const div = document.createElement('div');
   div.id = 'list';
+  console.log(arr)
+  const baseUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
+  const num_likes= await fetch(`${baseUrl}${localStorage.getItem('appId')}/likes`)
+  const likes = await num_likes.json();
+  console.log(likes)
   arr.forEach((element, index) => {
     const childdiv = document.createElement('div');
     childdiv.classList.add('card');
@@ -64,7 +69,7 @@ export const addToDom = (arr) => {
 
     const h3 = document.createElement('h3');
     h3.textContent = element.name;
-    navItemCount.textContent = `Pokeapi (${localStorage.getItem('count')})`;
+    navItemCount.textContent = `Pokeapi (${arr.length})`;
 
     const i = document.createElement('i');
     i.classList.add('far', 'fa-heart', 'heart', element.name);
@@ -75,10 +80,17 @@ export const addToDom = (arr) => {
     nameAndLikes.appendChild(h3);
     nameAndLikes.appendChild(i);
 
+   
+
     const span = document.createElement('span');
     span.classList.add('counter');
     span.textContent = '0 likes';
     span.setAttribute('id', element.name);
+
+    likes.forEach(ele=>{
+      if (ele.item_id===element.name)
+      span.textContent = `${ele.likes} likes`;
+    })
 
     const comments = document.createElement('button');
     comments.classList.add('comments');
