@@ -50,11 +50,8 @@ export const addToDom =async (arr) => {
 
   const div = document.createElement('div');
   div.id = 'list';
-  console.log(arr)
   const baseUrl = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/';
-  const num_likes= await fetch(`${baseUrl}${localStorage.getItem('appId')}/likes`)
-  const likes = await num_likes.json();
-  console.log(likes)
+  const response= await fetch(`${baseUrl}hHoFD9j03SveUto9LYCt/likes`).then(res=>res.json()).catch(err=>err)
   arr.forEach((element, index) => {
     const childdiv = document.createElement('div');
     childdiv.classList.add('card');
@@ -86,11 +83,13 @@ export const addToDom =async (arr) => {
     span.classList.add('counter');
     span.textContent = '0 likes';
     span.setAttribute('id', element.name);
-
-    likes.forEach(ele=>{
-      if (ele.item_id===element.name)
-      span.textContent = `${ele.likes} likes`;
-    })
+    if(response !==null || res!== undefined){
+      response.forEach(ele=>{
+        if (ele.item_id===element.name)
+        span.textContent = `${ele.likes} likes`;
+      })
+    }
+   
 
     const comments = document.createElement('button');
     comments.classList.add('comments');

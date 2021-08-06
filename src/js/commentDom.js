@@ -1,13 +1,10 @@
 export const commentDom= async()=>{
     const urlSearchParams = new URLSearchParams(window.location.search);
-    // const params = Object.fromEntries(urlSearchParams.entries());
     const params=localStorage.getItem("param_id")
     const baseUrl = `https://pokeapi.co/api/v2/pokemon/${params}`;
-    console.log(baseUrl)
     
      let response= await fetchApi(baseUrl, 'GET', null)
      response=JSON.parse(response)
-     console.log(response)
      const myModal= document.createElement("div");
      myModal.className="modal"
      myModal.id="myModal"
@@ -21,7 +18,6 @@ export const commentDom= async()=>{
      imgDiv.className="commentimg"
      const imgTiltle= document.createElement('h3')
      imgTiltle.textContent=response.name;
-     console.log(response.name)
      imgTiltle.classList="imgTiltle"
 
      const descriptionDiv=document.createElement('div');
@@ -150,7 +146,6 @@ const fetchApi=async (url, method, jsonBody = null) => {
   export const createApi=async () => {
     const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
     const response= await fetchApi(url, "POST", null)
-    console.log(response)
     localStorage.setItem('appId', response);
     return response;
   }
@@ -164,22 +159,18 @@ const fetchApi=async (url, method, jsonBody = null) => {
     return false
   }
   const commentObj={"item_id": `item_${localStorage.getItem("param_id")}`,"username": name,"comment": insight}
-  console.log(commentObj)
   const res = await fetchApi(`${url}/YIjg3yIZT4F7nzTzgVCU/comments`, "POST", commentObj)
   await displayComment()
   return res;
  }
 
  export const getComments= async()=>{
-   //p0IRWNkFCp5mj1BYqr8K
-   //${localStorage.getItem('appId')}
   const url = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
    try {
   
       
     const response= await fetch(`${url}/YIjg3yIZT4F7nzTzgVCU/comments?item_id=item_${localStorage.getItem("param_id")}`)
     const comments = await response.json();
-    console.log(comments)
     return comments;
   } catch (error) {
     return error.JSON;
@@ -194,7 +185,6 @@ const fetchApi=async (url, method, jsonBody = null) => {
   }
    const comments=await getComments();
    if (comments.length >= 1 && comments !== undefined){
-     console.log(comments)
      document.getElementById("commentHead").textContent=`Comments(${comments.length})`
     
      comments.forEach(element => {
